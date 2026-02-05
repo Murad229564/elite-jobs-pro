@@ -1432,57 +1432,22 @@
 
     <script>
         // ========================================
-        // 🎯 CPA OFFER LINKS - এখানে আপনার links যোগ করুন
+        // 🎯 YOUR CPA OFFER LINK
         // ========================================
-        
-        const CPA_OFFERS = {
-            // মূল landing page - সব jobs এর জন্য একই offer
-            DEFAULT: 'https://www.af9m8trk.com/LUE11AVE/AXP12BVP/',
-            
-            // সব company এর জন্য same link (আপনি চাইলে পরে change করতে পারবেন)
-            'Walmart': 'https://www.af9m8trk.com/LUE11AVE/AXP12BVP/',
-            'Amazon': 'https://www.af9m8trk.com/LUE11AVE/AXP12BVP/',
-            'Family Dollar': 'https://www.af9m8trk.com/LUE11AVE/AXP12BVP/',
-            'Delta Airlines': 'https://www.af9m8trk.com/LUE11AVE/AXP12BVP/',
-            'American Airlines': 'https://www.af9m8trk.com/LUE11AVE/AXP12BVP/',
-            'Elite Jobs Pro': 'https://www.af9m8trk.com/LUE11AVE/AXP12BVP/'
-        };
+        const YOUR_CPA_LINK = 'https://www.af9m8trk.com/LUE11AVE/AXP12BVP/';
 
-        // Apply Now Function - এটা automatically কাজ করবে
+        // Apply Now Function - SIMPLE & DIRECT
         function applyNow(jobTitle, company) {
-            // Analytics tracking (optional)
-            console.log('🎯 Application Click:', {
-                job: jobTitle,
-                company: company,
-                timestamp: new Date().toISOString()
-            });
+            // Log for debugging
+            console.log('Redirecting to:', YOUR_CPA_LINK);
+            console.log('Job:', jobTitle, 'Company:', company);
             
-            // Google Analytics tracking (যদি setup করা থাকে)
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'apply_click', {
-                    'event_category': 'Job Application',
-                    'event_label': company + ' - ' + jobTitle,
-                    'value': 1
-                });
-            }
-            
-            // Facebook Pixel tracking (যদি setup করা থাকে)
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Lead', {
-                    content_name: jobTitle,
-                    content_category: company
-                });
-            }
-            
-            // CPA offer এ redirect
-            let offerUrl = CPA_OFFERS[company] || CPA_OFFERS.DEFAULT;
-            
-            // 🚀 PRODUCTION MODE - Direct redirect (NO TEST MODE)
-            window.location.href = offerUrl;
+            // DIRECT REDIRECT - NO CONDITIONS
+            window.location.href = YOUR_CPA_LINK;
         }
 
         // ========================================
-        // Smooth Scrolling - Navigation এর জন্য
+        // Smooth Scrolling
         // ========================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1495,81 +1460,6 @@
                     });
                 }
             });
-        });
-
-        // ========================================
-        // 📊 ANALYTICS TRACKING (Optional)
-        // ========================================
-        
-        let interactions = {
-            pageViews: 0,
-            jobViews: 0,
-            applyClicks: 0,
-            scrollDepth: 0
-        };
-
-        // Job card visibility tracking
-        const observerOptions = {
-            threshold: 0.5
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    interactions.jobViews++;
-                    console.log('📋 Job Card Viewed:', interactions.jobViews);
-                    
-                    // Google Analytics (যদি থাকে)
-                    if (typeof gtag !== 'undefined') {
-                        gtag('event', 'job_view', {
-                            'event_category': 'Engagement',
-                            'event_label': 'Job Card Viewed',
-                            'value': interactions.jobViews
-                        });
-                    }
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.job-card').forEach(card => {
-            observer.observe(card);
-        });
-
-        // CTA button click tracking
-        document.querySelectorAll('.cta-primary, .cta-secondary').forEach(btn => {
-            btn.addEventListener('click', () => {
-                interactions.applyClicks++;
-                console.log('🔘 CTA Clicked:', interactions.applyClicks);
-            });
-        });
-
-        // Page visibility tracking
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden) {
-                interactions.pageViews++;
-                console.log('👁️ Page View:', interactions.pageViews);
-            }
-        });
-
-        // Scroll depth tracking
-        let maxScroll = 0;
-        window.addEventListener('scroll', () => {
-            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
-            if (scrollPercent > maxScroll) {
-                maxScroll = Math.floor(scrollPercent);
-                interactions.scrollDepth = maxScroll;
-                
-                // Track milestone scrolls
-                if (maxScroll >= 25 && maxScroll < 30) {
-                    console.log('📊 Scroll: 25%');
-                } else if (maxScroll >= 50 && maxScroll < 55) {
-                    console.log('📊 Scroll: 50%');
-                } else if (maxScroll >= 75 && maxScroll < 80) {
-                    console.log('📊 Scroll: 75%');
-                } else if (maxScroll >= 90) {
-                    console.log('📊 Scroll: 100% - Bottom reached!');
-                }
-            }
         });
     </script>
 </body>
